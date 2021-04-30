@@ -1,57 +1,157 @@
-import com.github.pambrose.common.util.*
-import com.github.pambrose.common.util.OwnerType.*
-import com.github.readingbat.dsl.*
+import com.github.pambrose.common.util.FileSystemSource
+import com.github.pambrose.common.util.GitHubRepo
+import com.github.pambrose.common.util.OwnerType
 import com.github.readingbat.dsl.ReturnType.*
+import com.github.readingbat.dsl.isProduction
+import com.github.readingbat.dsl.readingBatContent
+
 
 val content =
   readingBatContent {
-    repo = if (isProduction()) GitHubRepo(Organization, "readingbat", "readingbat-template") else FileSystemSource("./")
-    // After cloning this template, you need to change the GitHubRepo args to point to your content.
-    // If user gsmith cloned the template into a repo named my-readingbat-content, the args would look like this:
-    // repo = if (isProduction()) GitHubRepo(User, "gsmith", "my-readingbat-content") else FileSystemSource("./")
+    repo = if (isProduction()) GitHubRepo(OwnerType.User, "maleich", "ReadingBat-content") else FileSystemSource("./")
 
     python {
 
-      group("Group 1") {
-        packageName = "group1"
-        description = "Description of **Python** Group 1"
+      group("Booleans") {
+        packageName = "boolean"
+        description = "Basic boolean expressions"
 
-        challenge("find_it") {
+        challenge("boolean1") {
+          description = "Descriptions support **markdown**"
           returnType = BooleanType
         }
 
-        // Include all challenges matching the "slice*.py" filename pattern
+        includeFilesWithType = "boolean*.py" returns BooleanType
+        includeFilesWithType = "greater_than*.py" returns BooleanType
+        includeFilesWithType = "less_than*.py" returns BooleanType
+        includeFilesWithType = "is_equal*.py" returns BooleanType
+        includeFilesWithType = "not_equal*.py" returns BooleanType
+      }
+
+      group("Strings") {
+        packageName = "strings"
+        description = "Practicing string operations"
+        includeFilesWithType = "strings*.py" returns StringType
+      }
+
+      group("Grab Bag") {
+        packageName = "grab_bag"
+        description = "Miscellaneous practice"
         includeFilesWithType = "slice*.py" returns StringType
-      }
-    }
 
-    java {
-
-      group("Group 1") {
-        packageName = "group1"
-        description = "Description of **Java** Group 1"
-
-        challenge("JoinEnds") {                 // Java Return types are inferred from the code
-          codingBatEquiv = "p141494"            // Will add a link to this codingbat.com challenge
+        challenge("parameters1") {
+          returnType = IntType
         }
-
-        // Include all challenges matching the "Has*.java" filename pattern
-        includeFiles = "Has*.java"
+        challenge("Fibonacci") {
+          returnType = IntType
+        }
+        challenge("triangle") {
+          returnType = BooleanType
+        }
+        challenge("square_root") {
+          returnType = BooleanType
+        }
+        challenge("leap_year") {
+          returnType = IntType
+        }
       }
-    }
 
-    kotlin {
+      group("Loops") {
+        packageName = "loops"
+        description = "While and for loop practice"
+        includeFilesWithType = "while*.py" returns IntType
 
-      group("Group 1") {
-        packageName = "kgroup1"
-        description = "Description of **Kotlin** Group 1"
-
-        challenge("StringLambda1") {
+        challenge("for_loop1") {
+          //description = *in exercise*
           returnType = StringType
         }
-
-        // Include all challenges matching the "Int*.kt" filename pattern
-        includeFilesWithType = "Int*.kt" returns IntType
+        challenge("for_loop2") {
+          //description = *in exercise*
+          returnType = IntType
+        }
       }
+      group("Lists") {
+        packageName = "lists"
+        description = "Working with lists"
+        includeFilesWithType = "lists*.py" returns IntListType
+      }
+      group("Conditionals") {
+        packageName = "conditionals"
+        description = "If/elif/else"
+
+        challenge("conditionals1") {
+          returnType = IntType
+        }
+        challenge("conditionals2") {
+          returnType = BooleanType
+        }
+        challenge("conditionals3") {
+          returnType = IntType
+        }
+        challenge("conditionals4") {
+          returnType = IntType
+        }
+        challenge("conditionals5") {
+          returnType = BooleanType
+        }
+
+
+
+      }
+
+      group("Variables") {
+        packageName = "variables"
+        description = "Variables & mathematical operations"
+
+        challenge("addition1") {
+          //description = *in exercise*
+          returnType = IntType
+        }
+        challenge("addition2") {
+          //description = *in exercise*
+          returnType = FloatType
+        }
+        challenge("addition3") {
+          //description = *in exercise*
+          returnType = IntType
+        }
+        challenge("addition4") {
+          returnType = StringType
+        }
+        challenge("subtract1") {
+          returnType = IntType
+        }
+        challenge("subtract2") {
+          returnType = FloatType
+        }
+        challenge("subtract3") {
+          returnType = IntType
+        }
+        challenge("mult1") {
+          returnType = IntType
+        }
+        challenge("mult2") {
+          returnType = StringType
+        }
+        challenge("divide1") {
+          returnType = FloatType
+        }
+        challenge("mod1") {
+          returnType = IntType
+        }
+        challenge("exponent1") {
+          returnType = IntType
+        }
+        challenge("floor_division1") {
+          returnType = IntType
+        }
+        challenge("math1") {
+          returnType = FloatType
+        }
+        includeFilesWithType = "variable_type*.py" returns StringType
+      }
+
     }
   }
+
+
