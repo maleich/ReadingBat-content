@@ -1,4 +1,5 @@
-# @desc Fibonacci problem. By Benji '24
+# @desc Fibonacci problem.
+# @desc By Benji '24
 
 def fibonacci(n):
     a = 1

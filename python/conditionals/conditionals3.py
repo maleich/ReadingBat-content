@@ -1,4 +1,5 @@
-# @desc Predict the result... By Jacob '24
+# @desc Predict the result.
+# @desc By Jacob '24
 
 def exponent(num):
     if num > 20:

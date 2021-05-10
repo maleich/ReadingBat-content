@@ -1,4 +1,5 @@
-# @desc Predict the result... By Margot '24
+# @desc Predict the result.
+# @desc By Margot '24
 
 def calc(x):
     if x % 7 == 0:

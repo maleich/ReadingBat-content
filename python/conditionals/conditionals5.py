@@ -1,5 +1,5 @@
 # @desc Even or odd?
-# @desc Yuk '24
+# @desc by Yuk '24
 
 def odd_even(n):
     if n < 100:
