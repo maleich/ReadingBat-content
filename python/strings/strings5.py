@@ -10,8 +10,9 @@ def main():
     print(times_5('world'))
     print(times_5('apples'))
     print(times_5(''))
+    print(times_5(' '))
     print(times_5('a'))
-    print(times_5('oof'))
+    print(times_5('*'))
 
 
 if __name__ == '__main__':
