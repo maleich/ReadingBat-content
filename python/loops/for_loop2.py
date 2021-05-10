@@ -1,5 +1,5 @@
 # @desc Predict the returned result
-# by Bruno '24
+# @desc by Bruno '24
 
 def adding(x, y):
     new_list = 0
