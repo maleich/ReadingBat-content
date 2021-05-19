@@ -75,7 +75,9 @@ val content =
         packageName = "lists"
         description = "Working with lists"
         includeFilesWithType = "lists*.py" returns IntListType
+
       }
+
       group("Conditionals") {
         packageName = "conditionals"
         description = "If/elif/else"
