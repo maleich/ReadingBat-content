@@ -61,9 +61,6 @@ val content =
         description = "While and for loop practice"
         includeFilesWithType = "while*.py" returns IntType
 
-        challenge("is_exponent") {
-          returnType = StringType
-        }
         challenge("for_loop1") {
           returnType = StringType
         }
