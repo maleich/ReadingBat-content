@@ -1,4 +1,5 @@
-# @desc Add a short description or instruction here. This will show up at the top of the exercise.
+# @desc Triangle practice
+# @desc by Bernie '21
 
 def pythagSolve(side_A, side_B):
     side_A = side_A ** 2
