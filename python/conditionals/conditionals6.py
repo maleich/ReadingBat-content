@@ -2,16 +2,15 @@
 # @desc by Bernie '21
 
 def is_percent(x):
-    if type(x)==float or type(x)==int:
+    if type(x) == float or type(x) == int:
         if x <= 100 and x >= 0:
-            percent = round(x / 100, 2)
-            return str(percent)
+            return str(x)
         elif x > 100:
-            return "Too high!"
+            return "Too high"
         else:
-            return "Too low!"
+            return "Too low"
     else:
-        return "INVALID"
+        return "Invalid"
 
 
 def main():
@@ -19,7 +18,7 @@ def main():
     print(is_percent("Water"))
     print(is_percent(107))
     print(is_percent(-12))
-    print(is_percent(15))
+    print(is_percent(90))
 
 if __name__ == '__main__':
     main()
