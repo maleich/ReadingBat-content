@@ -10,7 +10,7 @@ def power_find(x, y):
     if x == y:
         return i
     else:
-        return None
+        return 0
 
 
 

@@ -95,7 +95,9 @@ val content =
         challenge("conditionals5") {
           returnType = BooleanType
         }
-
+        challenge("conditionals6") {
+          returnType = StringType
+        }
 
 
       }
