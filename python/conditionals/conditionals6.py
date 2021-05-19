@@ -1,17 +1,17 @@
 # @desc Determine the value returned by the function.
 # @desc by Bernie '21
 
-def power_find(x,y):
-    x_1 = x
+def power_find(x, y):
     i = 1
+    init_x = x
     while x < y:
-        x *= x_1
+        x *= init_x
         i += 1
     if x == y:
-        result=f"{x_1} to the power of {i} is {y}"
+        return i
     else:
-        result="X is not an exponential of Y"
-    return result
+        return 0
+
 
 
 def main():
