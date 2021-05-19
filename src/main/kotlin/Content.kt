@@ -38,7 +38,7 @@ val content =
         packageName = "grab_bag"
         description = "Miscellaneous practice"
         includeFilesWithType = "slice*.py" returns StringType
-        includeFilesWithType = "geometry*.py" returns IntType
+        includeFilesWithType = "geometry*.py" returns FloatType
         challenge("parameters1") {
           returnType = IntType
         }
