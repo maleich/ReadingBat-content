@@ -4,7 +4,7 @@
 def word_length(x):
     counter = 0
     for i in x:
-        counter = counter + 1
+        counter += 1
     return counter
 
 
