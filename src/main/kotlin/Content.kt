@@ -26,6 +26,7 @@ val content =
         includeFilesWithType = "less_than*.py" returns BooleanType
         includeFilesWithType = "is_equal*.py" returns BooleanType
         includeFilesWithType = "not_equal*.py" returns BooleanType
+        includeFilesWithType = "test*.py" returns BooleanType
       }
 
       group("Strings") {
@@ -74,6 +75,7 @@ val content =
           returnType = IntType
         }
       }
+
       group("Lists") {
         packageName = "lists"
         description = "Working with lists"
