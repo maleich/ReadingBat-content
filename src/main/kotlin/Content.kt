@@ -70,6 +70,9 @@ val content =
         challenge("for_loop3") {
           returnType = IntType
         }
+        challenge("for_loop4") {
+          returnType = IntType
+        }
       }
       group("Lists") {
         packageName = "lists"
@@ -104,7 +107,12 @@ val content =
         challenge("conditionals7") {
           returnType = IntType
         }
-
+        challenge("conditionals8") {
+          returnType = StringType
+        }
+        challenge("conditionals9") {
+          returnType = StringType
+        }
       }
 
       group("Variables") {
@@ -140,6 +148,9 @@ val content =
         }
         challenge("mult2") {
           returnType = StringType
+        }
+        challenge("mult3") {
+          returnType = IntType
         }
         challenge("divide1") {
           returnType = FloatType
