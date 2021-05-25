@@ -75,6 +75,7 @@ val content =
         packageName = "lists"
         description = "Working with lists"
         includeFilesWithType = "lists*.py" returns IntListType
+        includeFilesWithType = "list_indexing*.py" returns StringType
 
       }
 
@@ -100,7 +101,9 @@ val content =
         challenge("conditionals6") {
           returnType = StringType
         }
-
+        challenge("conditionals7") {
+          returnType = IntType
+        }
 
       }
 
@@ -143,6 +146,9 @@ val content =
         }
         challenge("mod1") {
           returnType = IntType
+        }
+        challenge("mod2") {
+          returnType = StringType
         }
         challenge("exponent1") {
           returnType = IntType
