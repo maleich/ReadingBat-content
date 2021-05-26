@@ -1,6 +1,7 @@
-# determining a number's divisibility by 3
+# @desc Determining a number's divisibility
+# @desc by Savonnah '23
 
-def divisibilty_name(num):     # from number that is tested, it will determine if it is divisible by 3
+def divisibilty_name(num):
     result = num % 3
     if result == 0:
         return True
