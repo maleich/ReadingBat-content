@@ -27,6 +27,7 @@ val content =
         includeFilesWithType = "is_equal*.py" returns BooleanType
         includeFilesWithType = "not_equal*.py" returns BooleanType
         includeFilesWithType = "test*.py" returns BooleanType
+        includeFilesWithType = "divisibility*.py" returns BooleanType
       }
 
       group("Strings") {
@@ -114,6 +115,9 @@ val content =
         }
         challenge("conditionals9") {
           returnType = StringType
+        }
+        challenge("calculator") {
+          returnType = IntType
         }
       }
 
