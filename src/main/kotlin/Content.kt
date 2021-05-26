@@ -76,10 +76,10 @@ val content =
         }
       }
 
-      group("Lists") {
+      group("List Practice") {
         packageName = "lists"
         description = "Working with lists"
-        //includeFilesWithType = "lists*.py" returns IntListType
+        includeFilesWithType = "lists*.py" returns IntListType
         includeFilesWithType = "list_indexing*.py" returns StringType
 
       }
