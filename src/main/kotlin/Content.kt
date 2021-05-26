@@ -77,7 +77,7 @@ val content =
       }
 
       group("List Practice") {
-        packageName = "lists"
+        packageName = "list_practice"
         description = "Working with lists"
         includeFilesWithType = "lists*.py" returns IntListType
         includeFilesWithType = "list_indexing*.py" returns StringType
