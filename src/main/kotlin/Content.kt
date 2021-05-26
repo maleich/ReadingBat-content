@@ -75,6 +75,9 @@ val content =
         challenge("for_loop4") {
           returnType = IntType
         }
+        challenge("num_name") {
+          returnType = IntType
+        }
       }
 
       group("List Practice") {
