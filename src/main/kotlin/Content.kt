@@ -34,6 +34,9 @@ val content =
         packageName = "strings"
         description = "Practicing string operations"
         includeFilesWithType = "strings*.py" returns StringType
+        challenge("str_find") {
+          returnType = IntType
+        }
       }
 
       group("Grab Bag") {
