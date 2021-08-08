@@ -1,4 +1,4 @@
-# @desc Finding characters
+# @desc Finding characters in a string
 
 def find_it(text):
     index = text.find("a")
