@@ -183,6 +183,8 @@ val content =
           returnType = FloatType
         }
         includeFilesWithType = "variable_type*.py" returns StringType
+        includeFilesWithType = "round*.py" returns FloatType
+        includeFilesWithType = "abs_value*.py" returns IntType
       }
 
     }
