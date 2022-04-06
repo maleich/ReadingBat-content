@@ -11,7 +11,7 @@ def decayed_word(word):
 def main():
     print(decayed_word("Hello"))
     print(decayed_word("World"))
-    print(decayed_word("Hi I'm me :)"))
+    print(decayed_word("Hi, I am me :)"))
     print(decayed_word("AAAAaAA"))
 
 
