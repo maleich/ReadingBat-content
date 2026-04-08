@@ -1,9 +1,13 @@
-import com.github.pambrose.common.util.FileSystemSource
-import com.github.pambrose.common.util.GitHubRepo
-import com.github.pambrose.common.util.OwnerType
-import com.github.readingbat.dsl.ReturnType.*
-import com.github.readingbat.dsl.isProduction
-import com.github.readingbat.dsl.readingBatContent
+import com.pambrose.common.util.FileSystemSource
+import com.pambrose.common.util.GitHubRepo
+import com.pambrose.common.util.OwnerType
+import com.readingbat.dsl.ReturnType.BooleanType
+import com.readingbat.dsl.ReturnType.FloatType
+import com.readingbat.dsl.ReturnType.IntListType
+import com.readingbat.dsl.ReturnType.IntType
+import com.readingbat.dsl.ReturnType.StringType
+import com.readingbat.dsl.isProduction
+import com.readingbat.dsl.readingBatContent
 
 
 val content =

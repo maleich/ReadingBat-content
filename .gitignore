@@ -8,6 +8,8 @@ build/
 .gradle/
 out/
 bin/
+.kotlin/
+
 
 *.iml
 *.ipr

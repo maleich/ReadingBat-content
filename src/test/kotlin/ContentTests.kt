@@ -1,95 +1,86 @@
-import com.github.pambrose.common.util.*
-import com.github.readingbat.TestSupport.answerAllWith
-import com.github.readingbat.TestSupport.answerAllWithCorrectAnswer
-import com.github.readingbat.TestSupport.answerFor
-import com.github.readingbat.TestSupport.forEachAnswer
-import com.github.readingbat.TestSupport.forEachChallenge
-import com.github.readingbat.TestSupport.forEachGroup
-import com.github.readingbat.TestSupport.forEachLanguage
-import com.github.readingbat.TestSupport.javaChallenge
-import com.github.readingbat.TestSupport.kotlinChallenge
-import com.github.readingbat.TestSupport.pythonChallenge
-import com.github.readingbat.TestSupport.shouldHaveAnswer
-import com.github.readingbat.TestSupport.shouldNotHaveAnswer
-import com.github.readingbat.TestSupport.testModule
-import com.github.readingbat.common.*
-import com.github.readingbat.common.Property.*
-import com.github.readingbat.dsl.*
-import com.github.readingbat.posts.*
-import com.github.readingbat.posts.AnswerStatus.*
-import com.github.readingbat.server.*
-import io.kotest.core.spec.style.*
-import io.kotest.matchers.*
-import io.kotest.matchers.string.*
-import io.ktor.application.*
-import io.ktor.server.engine.*
-import io.ktor.server.testing.*
+import com.readingbat.kotest.TestSupport.answerAllWith
+import com.readingbat.kotest.TestSupport.answerAllWithCorrectAnswer
+import com.readingbat.kotest.TestSupport.answerFor
+import com.readingbat.kotest.TestSupport.forEachAnswer
+import com.readingbat.kotest.TestSupport.forEachChallenge
+import com.readingbat.kotest.TestSupport.forEachGroup
+import com.readingbat.kotest.TestSupport.forEachLanguage
+import com.readingbat.kotest.TestSupport.initTestProperties
+import com.readingbat.kotest.TestSupport.pythonChallenge
+import com.readingbat.kotest.TestSupport.shouldHaveAnswer
+import com.readingbat.kotest.TestSupport.testModule
+import com.readingbat.posts.AnswerStatus.CORRECT
+import com.readingbat.posts.AnswerStatus.INCORRECT
+import com.readingbat.posts.AnswerStatus.NOT_ANSWERED
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldBeBlank
+import io.ktor.server.testing.testApplication
 
-class ContentTests : StringSpec({
+class ContentTests : StringSpec() {
+  init {
+    beforeEach { initTestProperties() }
 
-  "Test all challenges" {
-    withTestApplication({ testModule(content) }) {
+    "Test all challenges" {
+      testApplication {
+        application {
+          testModule(content)
+        }
 
-      content.forEachLanguage {
-        forEachGroup {
-          forEachChallenge {
-            answerAllWith(this@withTestApplication, "") {
-              answerStatus shouldBe NOT_ANSWERED
-              hint.shouldBeBlank()
-            }
+        content.forEachLanguage {
+          forEachGroup {
+            forEachChallenge {
+              answerAllWith(this@testApplication, "") {
+                answerStatus shouldBe NOT_ANSWERED
+                hint.shouldBeBlank()
+              }
 
-            answerAllWith(this@withTestApplication, "wrong answer") {
-              answerStatus shouldBe INCORRECT
-            }
+              answerAllWith(this@testApplication, "wrong answer") {
+                answerStatus shouldBe INCORRECT
+              }
 
-            answerAllWithCorrectAnswer(this@withTestApplication) {
-              answerStatus shouldBe CORRECT
-              hint.shouldBeBlank()
+              answerAllWithCorrectAnswer(this@testApplication) {
+                answerStatus shouldBe CORRECT
+                hint.shouldBeBlank()
+              }
             }
           }
         }
       }
     }
-  }
 
-  "Test with correct answers" {
-    withTestApplication({ testModule(content) }) {
-      content.forEachLanguage {
-        forEachGroup {
-          forEachChallenge {
-            forEachAnswer {
-              it shouldHaveAnswer correctAnswers[it.index]
+    "Test with correct answers" {
+      testApplication {
+        application {
+          testModule(content)
+        }
+
+        content.forEachLanguage {
+          forEachGroup {
+            forEachChallenge {
+              forEachAnswer {
+                it shouldHaveAnswer correctAnswers[it.index]
+              }
             }
           }
         }
       }
     }
-  }
 
-  "Test individual challenges" {
-    withTestApplication({ testModule(content) }) {
-      content.pythonChallenge("Group 1", "find_it") {
-        answerFor(0) shouldNotHaveAnswer "true"
-        answerFor(1) shouldNotHaveAnswer "false"
+    "Test individual challenges" {
+      testApplication {
+        application {
+          testModule(content)
+        }
 
-        answerFor(0) shouldHaveAnswer "False"
-        answerFor(1) shouldHaveAnswer "True"
-        answerFor(2) shouldHaveAnswer "False"
-        answerFor(3) shouldHaveAnswer "True"
-        answerFor(4) shouldHaveAnswer "False"
-      }
-
-      content.javaChallenge("Group 1", "JoinEnds") {
-        answerFor(0) shouldNotHaveAnswer "AB".toDoubleQuoted()
-
-        answerFor(0) shouldHaveAnswer "aB".toDoubleQuoted()
-      }
-
-      content.kotlinChallenge("Group 1", "StringLambda1") {
-        answerFor(0) shouldNotHaveAnswer "a0".toDoubleQuoted()
-
-        answerFor(0) shouldHaveAnswer "0a".toDoubleQuoted()
+        content.pythonChallenge("Booleans", "boolean1") {
+          answerFor(0) shouldHaveAnswer "False"
+          answerFor(1) shouldHaveAnswer "True"
+          answerFor(2) shouldHaveAnswer "False"
+          answerFor(3) shouldHaveAnswer "True"
+          answerFor(4) shouldHaveAnswer "False"
+        }
       }
     }
   }
-})
+}

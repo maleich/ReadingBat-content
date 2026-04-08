@@ -18,7 +18,7 @@ uber: uberjar
 	java -jar build/libs/server.jar
 
 cc:
-	./gradlew build --continuous -x test
+	./gradlew build --continuous -xtest
 
 run:
 	./gradlew run
@@ -33,4 +33,4 @@ versioncheck:
 	./gradlew dependencyUpdates
 
 upgrade-wrapper:
-	./gradlew wrapper --gradle-version=7.4.2 --distribution-type=bin
+	./gradlew wrapper --gradle-version=9.4.1 --distribution-type=bin
