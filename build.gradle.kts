@@ -17,12 +17,6 @@ description = "ReadingBat Site"
 group = "com.readingbat"
 version = "1.6.0"
 
-repositories {
-  // mavenLocal()
-  google()
-  mavenCentral()
-}
-
 dependencies {
   implementation(libs.readingbat.core)
   implementation(libs.core.utils)
