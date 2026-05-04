@@ -23,6 +23,21 @@ Once you create content for your students, send us a note and we will link the
 
 ## [Running a Server](https://github.com/readingbat/readingbat-template/wiki/Running-a-Server)
 
+## Build & Run
+
+Requires JDK 17.
+
+| Task | Command |
+| --- | --- |
+| Run the dev server (port 8080) | `make run` (or `./gradlew run`) |
+| Continuous build on file changes | `make cc` |
+| Build without tests | `make build` |
+| Run all tests | `make tests` |
+| Run a single test class | `./gradlew test --tests "ContentTests" --info` |
+| Build the shadow uberjar | `make uberjar` (output: `build/libs/server.jar`) |
+| Build uberjar and run it | `make uber` |
+| Check for dependency updates | `make versioncheck` |
+
 ## Content Specification
 
 Specify ReadingBat content with the ReadingBat-specific Kotlin DSL. Using the DSL does not require in-depth knowledge of
