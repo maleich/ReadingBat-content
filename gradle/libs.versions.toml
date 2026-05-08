@@ -1,4 +1,6 @@
 [versions]
+gradle = "9.5.0"
+jvm = "17"
 kotest = "6.1.11"
 kotlin = "2.3.21"
 ktor = "3.4.3"

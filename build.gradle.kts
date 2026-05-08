@@ -1,4 +1,16 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
+
+private object Tasks {
+  const val CLEAN = "clean"
+  const val BUILD = "build"
+  const val STAGE = "stage"
+}
+
+private object Shadow {
+  const val ARCHIVE_NAME = "server.jar"
+  val EXCLUDES = listOf("META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA", "LICENSE*")
+}
 
 plugins {
   application
@@ -23,25 +35,22 @@ dependencies {
 }
 
 kotlin {
-  jvmToolchain(17)
+  jvmToolchain(libs.versions.jvm.get().toInt())
 }
 
-tasks.register("stage") {
-  dependsOn("clean", "build")
+tasks.register(Tasks.STAGE) {
+  dependsOn(Tasks.CLEAN, Tasks.BUILD)
 }
 
-tasks.named("build") {
-  mustRunAfter("clean")
+tasks.named(Tasks.BUILD) {
+  mustRunAfter(Tasks.CLEAN)
 }
 
 tasks.shadowJar {
-  archiveFileName.set("server.jar")
+  archiveFileName.set(Shadow.ARCHIVE_NAME)
   isZip64 = true
   duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-  exclude("META-INF/*.SF")
-  exclude("META-INF/*.DSA")
-  exclude("META-INF/*.RSA")
-  exclude("LICENSE*")
+  Shadow.EXCLUDES.forEach { exclude(it) }
 }
 
 tasks.test {
@@ -49,7 +58,7 @@ tasks.test {
 
   testLogging {
     events = setOf(TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED)
-    exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
+    exceptionFormat = TestExceptionFormat.FULL
     showStandardStreams = false
   }
 }
