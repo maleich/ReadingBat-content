@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A **content repository** built on the [ReadingBat template](https://github.com/readingbat/readingbat-template). It does not implement the ReadingBat web framework — it depends on `com.readingbat:readingbat-core` (see `gradle/libs.versions.toml`) and supplies:
 
-1. Challenge source files (`python/`, `src/main/java/group1/`, `src/main/kotlin/kgroup1/`)
+1. Challenge source files (`python/`, `src/main/java/jgroup/`, `src/main/kotlin/kgroup/`)
 2. A Kotlin DSL declaration in `src/main/kotlin/Content.kt` that wires those files into language groups, return types, and descriptions
 3. A thin `ContentServer.kt` entry point that delegates to `ReadingBatServer.start(args)`
 

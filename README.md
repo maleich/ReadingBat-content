@@ -4,17 +4,17 @@
 
 [ReadingBat.com](https://www.readingbat.com) is an attempt to make learning how to program a little easier.
 
-We are big fans of [CodingBat.com](https://codingbat.com) (so much so, that we 
-shamelessly copied its look and feel). However, we observed that students often 
-start using it to write code, prior to being equipped with the skill of reading code. 
-It is difficult to write code without first learning how to read and follow code! 
-So we set out to create ReadingBat.com, which attempts to make students comfortable 
-reading code challenges and learning code idioms. Once a student is comfortable with 
+We are big fans of [CodingBat.com](https://codingbat.com) (so much so, that we
+shamelessly copied its look and feel). However, we observed that students often
+start using it to write code, prior to being equipped with the skill of reading code.
+It is difficult to write code without first learning how to read and follow code!
+So we set out to create ReadingBat.com, which attempts to make students comfortable
+reading code challenges and learning code idioms. Once a student is comfortable with
 reading code, they can head straight for [CodingBat.com](https://codingbat.com)
 and move on to authoring their own code!
 
-This template is for teachers who want to author their own ReadingBat content. 
-Once you create content for your students, send us a note and we will link the 
+This template is for teachers who want to author their own ReadingBat content.
+Once you create content for your students, send us a note and we will link the
 [ReadingBat.com](https://www.readingbat.com) site to it.
 
 ## [Quickstart](https://github.com/readingbat/readingbat-template/wiki/Quickstart)
@@ -49,36 +49,36 @@ Specify the content in the [src/main/kotlin/Content.kt](./src/main/kotlin/Conten
 
 The structure of the DSL is:
 ```kotlin
-val content = 
-  readingBatContent { 
+val content =
+  readingBatContent {
     python {                                    // Creates a LanguageGroup object
       group("Group 1") {                        // Creates a ChallengeGroup named "Group 1"
-        packageName = "group1"                  // The path of the challenges in this group
+        packageName = "jgroup"                  // The path of the challenges in this group
         description = "Description of **Python** Group 1" // Descriptions support markdown
 
-        challenge("find_it") {                  // Creates a Challenge for group1/find_it.py
+        challenge("find_it") {                  // Creates a Challenge for jgroup/find_it.py
           returnType = BooleanType              // Challenge return type
         }
 
-        challenge("boolean2") {                 // Creates a Challenge for group1/boolean2.py
+        challenge("boolean2") {                 // Creates a Challenge for jgroup/boolean2.py
           returnType = BooleanType              // Challenge return type
         }
-        
+
         // Include all challenges matching the "slice*.py" filename pattern
-        includeFilesWithType = "slice*.py" returns StringType  
+        includeFilesWithType = "slice*.py" returns StringType
       }
     }
 
     java {
       group("Group 1") {
-        packageName = "group1"
+        packageName = "jgroup"
         description = "Description of **Java** Group 1"
 
         challenge("JoinEnds") {                 // Java Return types are inferred from the code
           codingBatEquiv = "p141494"            // Will add a link to this codingbat.com challenge
         }
 
-        challenge("ReplaceCheck")               // Creates a Challenge for group1/ReplaceCheck.java
+        challenge("ReplaceCheck")               // Creates a Challenge for jgroup/ReplaceCheck.java
 
         // Include all challenges matching the "Has*.java" filename pattern
         includeFiles = "Has*.java"
@@ -87,7 +87,7 @@ val content =
 
     kotlin {
       group("Group 1") {
-        packageName = "kgroup1"
+        packageName = "kgroup"
         description = "Description of **Kotlin** Group 1"
 
         challenge("StringLambda1") {
@@ -118,8 +118,8 @@ val content =
 
 ## Examples
 
-This [repo](https://github.com/readingbat/readingbat-site) describes the 
-[ReadingBat.com](https://readingbat.com) website. 
+This [repo](https://github.com/readingbat/readingbat-site) describes the
+[ReadingBat.com](https://readingbat.com) website.
 Its Content.kt combines content from 2 other repos.
 
 ### Content.kt Files for ReadingBat.com
