@@ -1,0 +1,57 @@
+# ReadingBat-content
+
+> A ReadingBat content repository — Python, Java, and Kotlin "reading
+> comprehension" coding challenges wired into the ReadingBat web framework
+> via a Kotlin DSL. This repo does not implement the framework itself; it
+> depends on `com.readingbat:readingbat-core` and supplies challenge source
+> files plus a `Content.kt` DSL declaration that registers them.
+
+Adding a challenge always means two things: (1) put the source file in the
+appropriate language directory under the group's `packageName`, and
+(2) register it in `src/main/kotlin/Content.kt` — either with an explicit
+`challenge("name") { returnType = ... }` block or via an
+`includeFilesWithType = "pattern*.ext" returns SomeType` glob. A file on
+disk is invisible to the site until the DSL references it. Java return
+types are inferred from the source; Python and Kotlin must be declared.
+
+## Project layout
+
+- [CLAUDE.md](CLAUDE.md): orientation for LLM-driven contributions —
+  commands, content/source pairing rules, gotchas.
+- [README.md](README.md): human-facing overview, DSL example, Build & Run table.
+- [CHANGELOG.md](CHANGELOG.md): Keep-a-Changelog history.
+- [RELEASE_NOTES.md](RELEASE_NOTES.md): prose-style release summaries.
+- [src/main/kotlin/Content.kt](src/main/kotlin/Content.kt): the DSL declaration
+  that wires every challenge file into a language group.
+- [src/main/kotlin/ContentServer.kt](src/main/kotlin/ContentServer.kt): thin
+  entry point that delegates to `ReadingBatServer.start(args)`.
+
+## Challenge sources
+
+- [python/](python/): Python challenge source files.
+- [src/main/java/jgroup/](src/main/java/jgroup/): Java challenge source files.
+- [src/main/kotlin/kgroup/](src/main/kotlin/kgroup/): Kotlin challenge source files.
+
+## Build & tooling
+
+- [Makefile](Makefile): self-documenting (`make help`). Common targets:
+  `make run`, `make build`, `make tests`, `make lint`, `make format`,
+  `make uber`, `make versioncheck`.
+- [build.gradle.kts](build.gradle.kts): Gradle build with Kotlin JVM, Ktor,
+  Shadow, kotlinter, detekt, and the Versions plugin.
+- [gradle/libs.versions.toml](gradle/libs.versions.toml): version catalog.
+- [settings.gradle.kts](settings.gradle.kts): centralized repository config
+  (`RepositoriesMode.FAIL_ON_PROJECT_REPOS`).
+
+## Tests
+
+- [src/test/kotlin/](src/test/kotlin/): Kotest `StringSpec` tests using
+  `com.readingbat:readingbat-kotest` helpers (`testModule`, `forEachLanguage`,
+  `forEachChallenge`, etc.). `ContentTests.kt` is the canonical example.
+
+## Optional
+
+- [Procfile](Procfile): Heroku entry point. Runs the shadow uberjar with
+  `-Dagent.config=src/main/resources/application.conf`.
+- [src/main/resources/application.conf](src/main/resources/application.conf):
+  Ktor configuration. `watch = ["readingbat-template"]` is dev-only.
