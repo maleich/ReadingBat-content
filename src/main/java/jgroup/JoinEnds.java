@@ -1,4 +1,4 @@
-package group1;
+package jgroup;
 
 // @desc Description of **JoinEnds.java**
 

@@ -1,5 +1,6 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 private object Tasks {
   const val CLEAN = "clean"
@@ -15,8 +16,10 @@ private object Shadow {
 plugins {
   application
   alias(libs.plugins.kotlin.jvm)
+  alias(libs.plugins.kotlinter)
   alias(libs.plugins.versions)
   alias(libs.plugins.ktor.plugin)
+  alias(libs.plugins.detekt)
 }
 
 // This is for ./gradlew run
@@ -36,6 +39,25 @@ dependencies {
 
 kotlin {
   jvmToolchain(libs.versions.jvm.get().toInt())
+  compilerOptions {
+    jvmTarget.set(JvmTarget.fromTarget(libs.versions.jvm.get()))
+    freeCompilerArgs.addAll(
+      "-Xjsr305=strict",
+      "-Xjvm-default=all",
+    )
+  }
+}
+
+detekt {
+  buildUponDefaultConfig = true
+  parallel = true
+  baseline = file("detekt-baseline.xml")
+}
+
+kotlinter {
+  ignoreFormatFailures = false
+  ignoreLintFailures = false
+  reporters = arrayOf("checkstyle", "plain")
 }
 
 tasks.register(Tasks.STAGE) {

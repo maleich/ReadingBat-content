@@ -1,4 +1,4 @@
-package group1;
+package jgroup;
 
 import static com.pambrose.common.util.ArrayUtils.arrayPrint;
 
