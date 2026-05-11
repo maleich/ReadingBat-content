@@ -41,10 +41,6 @@ kotlin {
   jvmToolchain(libs.versions.jvm.get().toInt())
   compilerOptions {
     jvmTarget.set(JvmTarget.fromTarget(libs.versions.jvm.get()))
-    freeCompilerArgs.addAll(
-      "-Xjsr305=strict",
-      "-Xjvm-default=all",
-    )
   }
 }
 
@@ -79,7 +75,7 @@ tasks.test {
   useJUnitPlatform()
 
   testLogging {
-    events = setOf(TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED)
+    events = setOf(TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED, TestLogEvent.STANDARD_ERROR)
     exceptionFormat = TestExceptionFormat.FULL
     showStandardStreams = false
   }

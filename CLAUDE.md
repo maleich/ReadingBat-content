@@ -14,15 +14,19 @@ When the user asks to "add a challenge," it almost always means: add the source 
 
 ## Commands
 
-- `make build` / `./gradlew build -xtest` — build without running tests
+- `make help` — list every Make target with a one-line description (self-documenting via `## ` annotations on each target)
+- `make build` / `./gradlew build -x test` — build without running tests
 - `make tests` / `./gradlew --rerun-tasks check` — run all tests
 - `make run` / `./gradlew run` — start the dev server on port 8080 (entry: `ContentServerKt`)
-- `make cc` — continuous build (`./gradlew build --continuous -xtest`)
+- `make cc` — continuous build (`./gradlew build --continuous -x test`)
 - `make uber` — build shadow uberjar to `build/libs/server.jar` and run it
+- `make lint` — run kotlinter + detekt (`./gradlew lintKotlin detekt`)
+- `make format` — apply kotlinter formatting (`./gradlew formatKotlin`)
+- `make detekt` / `make detekt-baseline` — run detekt or regenerate its baseline file
 - `make versioncheck` — `./gradlew dependencyUpdates` (default `make` target)
 - Run a single Kotest test: `./gradlew test --tests "ContentTests" --info`
 
-JVM toolchain is 17 (`kotlin { jvmToolchain(17) }`).
+JVM toolchain is 17 (`kotlin { jvmToolchain(17) }`). Compiler options also pin `jvmTarget` via the catalog.
 
 ## Content / source pairing
 
@@ -41,9 +45,17 @@ Tests use **Kotest** (`StringSpec`) plus `com.readingbat:readingbat-kotest` test
 
 When the user asks for new tests, follow the existing `ContentTests.kt` shape and the global rule: `StringSpec()` with `init {}`, MockK where appropriate.
 
+## Static analysis
+
+- **kotlinter** (`org.jmailen.kotlinter`) and **detekt** (`dev.detekt`, currently `2.0.0-alpha.3`) are both wired in. Configuration lives in the top-level `kotlinter {}` and `detekt {}` blocks of `build.gradle.kts`.
+- detekt is configured with `buildUponDefaultConfig = true` and reads an optional `detekt-baseline.xml` at the project root. If you bump detekt rules and want to grandfather existing findings, run `make detekt-baseline`.
+- kotlinter emits `checkstyle` + `plain` reports under `build/reports/ktlint/`.
+
 ## Gotchas
 
 - `application.conf` line 12 references `watch = ["readingbat-template"]` — this is dev-only; production deployments should not watch.
 - `Procfile` runs the uberjar with `-Dagent.config=src/main/resources/application.conf`. The config path is relative to the working directory, so don't move that file without updating the Procfile.
 - `settings.gradle.kts` sets `RepositoriesMode.FAIL_ON_PROJECT_REPOS` — repositories must be declared in `settings.gradle.kts`, not in `build.gradle.kts`.
 - `org.gradle.configuration-cache=false` is intentional (some plugin in the chain isn't CC-compatible); don't flip it without verifying the build still works.
+- The `gradle = "..."` entry in `gradle/libs.versions.toml` is consumed by the `Makefile` (`make upgrade-wrapper`) via `awk`, not by Gradle itself. Don't remove it thinking it's dead.
+- Java challenge package is `jgroup` and Kotlin challenge package is `kgroup` (not `group1` / `kgroup1`). The directory name must match the `packageName` in `Content.kt`.

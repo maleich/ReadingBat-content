@@ -29,14 +29,20 @@ Requires JDK 17.
 
 | Task | Command |
 | --- | --- |
+| List all Make targets | `make help` |
 | Run the dev server (port 8080) | `make run` (or `./gradlew run`) |
 | Continuous build on file changes | `make cc` |
 | Build without tests | `make build` |
 | Run all tests | `make tests` |
 | Run a single test class | `./gradlew test --tests "ContentTests" --info` |
+| Lint Kotlin sources (kotlinter + detekt) | `make lint` |
+| Format Kotlin sources | `make format` |
+| Run detekt only | `make detekt` |
+| Regenerate detekt baseline | `make detekt-baseline` |
 | Build the shadow uberjar | `make uberjar` (output: `build/libs/server.jar`) |
 | Build uberjar and run it | `make uber` |
 | Check for dependency updates | `make versioncheck` |
+| Upgrade the Gradle wrapper | `make upgrade-wrapper` |
 
 ## Content Specification
 
