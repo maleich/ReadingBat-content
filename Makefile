@@ -1,12 +1,14 @@
 .PHONY: default help clean build tests uberjar uber cc run heroku logs lint detekt detekt-baseline format \
 		versioncheck upgrade-wrapper _require-gradle-version
 
-GRADLE_VERSION := $(shell awk -F'"' '/^gradle[[:space:]]*=/ {print $$2; exit}' gradle/libs.versions.toml)
+GRADLE_VERSION := $(shell sed -n 's/^gradle = "\(.*\)"/\1/p' gradle/libs.versions.toml)
 
 default: versioncheck
 
-help: ## Show this help
-	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "  \033[36m%-22s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
+help:  ## Show this help (list of targets)
+	@awk 'BEGIN {FS = ":.*?## "; printf "Usage: make <target>\n\nTargets:\n"} \
+		/^[a-zA-Z0-9_-]+:.*?## / {printf "  \033[36m%-22s\033[0m %s\n", $$1, $$2}' \
+		$(MAKEFILE_LIST)
 
 clean: ## Clean build outputs
 	./gradlew clean
