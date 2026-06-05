@@ -1,14 +1,14 @@
 [versions]
 detekt = "2.0.0-alpha.3"
-gradle = "9.5.0"
+gradle-wrapper = "9.5.1"
 jvm = "17"
 kotest = "6.1.11"
-kotlin = "2.3.21"
-kotlinter = "5.4.2"
-ktor = "3.4.3"
-logging = "8.0.02"
+kotlin = "2.4.0"
+kotlinter = "5.5.0"
+ktor = "3.5.0"
+logging = "8.0.4"
 readingbat = "3.1.8"
-utils = "2.8.2"
+utils = "2.9.0"
 versions = "0.54.0"
 
 [libraries]
