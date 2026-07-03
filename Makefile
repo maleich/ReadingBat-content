@@ -1,4 +1,4 @@
-.PHONY: default help clean build tests uberjar uber cc run heroku logs lint detekt detekt-baseline format \
+.PHONY: default help clean build tests uberjar uber cc run lint detekt detekt-baseline format \
 		versions upgrade-wrapper _require-gradle-version
 
 GRADLE_VERSION := $(shell sed -n 's/^gradle-wrapper = "\(.*\)"/\1/p' gradle/libs.versions.toml)
@@ -18,14 +18,14 @@ build: ## Build without running tests
 lint: ## Run Kotlinter and detekt
 	./gradlew lintKotlin detekt
 
-format: ## Format Kotlin sources with kotlinter
-	./gradlew formatKotlin
-
 detekt: ## Run detekt static analysis
 	./gradlew detekt
 
 detekt-baseline: ## Generate detekt baseline file
 	./gradlew detektBaseline
+
+format: ## Format Kotlin sources with kotlinter
+	./gradlew formatKotlin
 
 tests: ## Run all tests
 	./gradlew --rerun-tasks check
@@ -41,12 +41,6 @@ cc: ## Continuous build (no tests)
 
 run: ## Start the dev server on port 8080
 	./gradlew run
-
-heroku: ## Deploy to Heroku (git push heroku master)
-	git push heroku master
-
-logs: ## Tail Heroku logs
-	heroku logs --tail
 
 versions: ## Check for dependency updates (default target)
 	./gradlew dependencyUpdates --no-configuration-cache --no-parallel

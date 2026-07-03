@@ -36,7 +36,7 @@ types are inferred from the source; Python and Kotlin must be declared.
 
 - [Makefile](Makefile): self-documenting (`make help`). Common targets:
   `make run`, `make build`, `make tests`, `make lint`, `make format`,
-  `make uber`, `make versioncheck`.
+  `make uber`, `make versions`.
 - [build.gradle.kts](build.gradle.kts): Gradle build with Kotlin JVM, Ktor,
   Shadow, kotlinter, detekt, and the Versions plugin.
 - [gradle/libs.versions.toml](gradle/libs.versions.toml): version catalog.

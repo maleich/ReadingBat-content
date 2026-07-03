@@ -25,7 +25,7 @@ Once you create content for your students, send us a note and we will link the
 
 ## Build & Run
 
-Requires JDK 17.
+Requires JDK 25.
 
 | Task | Command |
 | --- | --- |
@@ -41,7 +41,7 @@ Requires JDK 17.
 | Regenerate detekt baseline | `make detekt-baseline` |
 | Build the shadow uberjar | `make uberjar` (output: `build/libs/server.jar`) |
 | Build uberjar and run it | `make uber` |
-| Check for dependency updates | `make versioncheck` |
+| Check for dependency updates | `make versions` |
 | Upgrade the Gradle wrapper | `make upgrade-wrapper` |
 
 ## Content Specification

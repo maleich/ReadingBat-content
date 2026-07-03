@@ -23,10 +23,10 @@ When the user asks to "add a challenge," it almost always means: add the source 
 - `make lint` — run kotlinter + detekt (`./gradlew lintKotlin detekt`)
 - `make format` — apply kotlinter formatting (`./gradlew formatKotlin`)
 - `make detekt` / `make detekt-baseline` — run detekt or regenerate its baseline file
-- `make versioncheck` — `./gradlew dependencyUpdates` (default `make` target)
+- `make versions` — `./gradlew dependencyUpdates` (check for dependency updates; bare `make` prints `help`)
 - Run a single Kotest test: `./gradlew test --tests "ContentTests" --info`
 
-JVM toolchain is 17 (`kotlin { jvmToolchain(17) }`). Compiler options also pin `jvmTarget` via the catalog.
+JVM toolchain is 25 (`kotlin { jvmToolchain(25) }`, driven by the `jvm` entry in `gradle/libs.versions.toml`). The production `compileKotlin` task also enables Kotlin's unused-return-value checker (`-Xreturn-value-checker=check`); it is intentionally **not** applied to test sources, since Kotest's assertion DSL returns its receiver and would emit only false positives there.
 
 ## Content / source pairing
 
@@ -47,8 +47,8 @@ When the user asks for new tests, follow the existing `ContentTests.kt` shape an
 
 ## Static analysis
 
-- **kotlinter** (`org.jmailen.kotlinter`) and **detekt** (`dev.detekt`, currently `2.0.0-alpha.3`) are both wired in. Configuration lives in the top-level `kotlinter {}` and `detekt {}` blocks of `build.gradle.kts`.
-- detekt is configured with `buildUponDefaultConfig = true` and reads an optional `detekt-baseline.xml` at the project root. If you bump detekt rules and want to grandfather existing findings, run `make detekt-baseline`.
+- **kotlinter** (`org.jmailen.kotlinter`) and **detekt** (`dev.detekt`, currently `2.0.0-alpha.5`) are both wired in. `build.gradle.kts` routes every concern through small `configure*` extension functions; kotlinter and detekt config live in `configureKotlinter()` and `configureDetekt()`.
+- detekt runs with `buildUponDefaultConfig = true` and scans both `src/main/kotlin` and `src/test/kotlin`. The build no longer references a baseline file; `make detekt-baseline` can still generate `detekt-baseline.xml`, but you must re-add `baseline = file("detekt-baseline.xml")` to `configureDetekt()` for detekt to consume it.
 - kotlinter emits `checkstyle` + `plain` reports under `build/reports/ktlint/`.
 
 ## Gotchas
@@ -57,5 +57,6 @@ When the user asks for new tests, follow the existing `ContentTests.kt` shape an
 - `Procfile` runs the uberjar with `-Dagent.config=src/main/resources/application.conf`. The config path is relative to the working directory, so don't move that file without updating the Procfile.
 - `settings.gradle.kts` sets `RepositoriesMode.FAIL_ON_PROJECT_REPOS` — repositories must be declared in `settings.gradle.kts`, not in `build.gradle.kts`.
 - `org.gradle.configuration-cache=false` is intentional (some plugin in the chain isn't CC-compatible); don't flip it without verifying the build still works.
-- The `gradle = "..."` entry in `gradle/libs.versions.toml` is consumed by the `Makefile` (`make upgrade-wrapper`) via `awk`, not by Gradle itself. Don't remove it thinking it's dead.
+- The `gradle-wrapper = "..."` entry in `gradle/libs.versions.toml` is consumed by the `Makefile` (`make upgrade-wrapper`) via `sed`, not by Gradle itself. Don't remove it thinking it's dead.
+- `make versions` (dependencyUpdates) filters out pre-release candidates (alpha/beta/RC/milestone/snapshot) for any dependency currently on a stable version, but still surfaces newer pre-releases for deps already tracking a pre-release line (e.g. detekt's alpha). See `configureVersions()` in `build.gradle.kts`.
 - Java challenge package is `jgroup` and Kotlin challenge package is `kgroup` (not `group1` / `kgroup1`). The directory name must match the `packageName` in `Content.kt`.
