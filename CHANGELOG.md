@@ -6,11 +6,20 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-07-26
+
+Tooling, dependency, and documentation release. No challenge content changed.
+
 ### Added
-- Kotlinter (`org.jmailen.kotlinter` 5.5.0) and detekt (`dev.detekt` 2.0.0-alpha.5)
+- Kotlinter (`org.jmailen.kotlinter` 5.6.0) and detekt (`dev.detekt` 2.0.0-alpha.5)
   Gradle plugins with explicit configuration
   (`buildUponDefaultConfig`, `parallel`, reporters); detekt now scans both
   `src/main/kotlin` and `src/test/kotlin`.
+- GitHub Actions CI workflow (`.github/workflows/ci.yml`) that runs `lintKotlin`,
+  `detekt`, and `test` on pushes to `master` and on every pull request. Each step
+  is guarded with `if: success() || failure()` so one run reports every failure,
+  stale runs on the same ref are cancelled via a concurrency group, and Gradle
+  reports are uploaded as an artifact on failure.
 - Kotlin's unused-return-value checker (`-Xreturn-value-checker=check`) on the
   production `compileKotlin` task only (test sources are exempt because Kotest's
   assertion DSL returns its receiver).
@@ -20,10 +29,12 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   `make versions` ignores alpha/beta/RC/milestone/snapshot candidates for
   dependencies currently on a stable version while still surfacing newer
   pre-releases for deps already on a pre-release line.
-- Self-documenting `make help` target driven by awk parsing of `## ` annotations.
+- Self-documenting `make help` target driven by awk parsing of `## ` annotations,
+  with a usage header and a broadened target-name regex.
 - Make targets: `lint`, `format`, `detekt`, `detekt-baseline`, plus a
   `_require-gradle-version` guard for `upgrade-wrapper`.
 - `.editorconfig` at the repository root.
+- Project documentation set: `CHANGELOG.md`, `RELEASE_NOTES.md`, and `llms.txt`.
 
 ### Changed
 - Renamed challenge packages: `group1` → `jgroup` (Java) and `kgroup1` → `kgroup`
@@ -33,8 +44,16 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Refactored `build.gradle.kts` into focused `configure*` extension functions
   (Kotlin, detekt, kotlinter, ktor, shadow, test, versions).
 - Bumped the JVM toolchain to 25, the Gradle wrapper to 9.6.1,
-  `readingbat-core`/`readingbat-kotest` to 3.2.1, Kotest to 6.2.1, Ktor to 3.5.1,
-  and `core-utils` to 2.9.3.
+  `readingbat-core`/`readingbat-kotest` to 3.3.0, Kotlin to 2.4.10, Kotest to
+  6.2.3, Ktor to 3.5.1, kotlin-logging to 8.0.4, and `core-utils` to 3.2.1.
+- `make upgrade-wrapper` now invokes the wrapper task twice, following Gradle's
+  documented two-step upgrade (the first pass rewrites
+  `gradle-wrapper.properties`, the second regenerates the wrapper itself).
+- Renamed the `gradle` version-catalog key to `gradle-wrapper` and switched the
+  Makefile's version extraction from `awk` to `sed`.
+- Renamed the `versioncheck` Make target to `versions`, which now passes
+  `--no-configuration-cache --no-parallel` to `dependencyUpdates`; the default
+  Make target is `help`.
 - `ContentTests` updated for the suspending answer API
   (`runBlocking { … correctAnswers()[it.index] }`).
 - Relaxed the shadow uberjar duplicate-handling strategy to `WARN`.
