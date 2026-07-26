@@ -14,6 +14,9 @@ appropriate language directory under the group's `packageName`, and
 disk is invisible to the site until the DSL references it. Java return
 types are inferred from the source; Python and Kotlin must be declared.
 
+Current version: **1.1.0** (see [CHANGELOG.md](CHANGELOG.md)). Building requires
+JDK 25.
+
 ## Project layout
 
 - [CLAUDE.md](CLAUDE.md): orientation for LLM-driven contributions —
@@ -40,8 +43,14 @@ types are inferred from the source; Python and Kotlin must be declared.
 - [build.gradle.kts](build.gradle.kts): Gradle build with Kotlin JVM, Ktor,
   Shadow, kotlinter, detekt, and the Versions plugin.
 - [gradle/libs.versions.toml](gradle/libs.versions.toml): version catalog.
+  Kotlin 2.4.10, Ktor 3.5.1, readingbat-core 3.3.0, Kotest 6.2.3,
+  kotlinter 5.6.0, detekt 2.0.0-alpha.5, Gradle wrapper 9.6.1, JVM toolchain 25.
 - [settings.gradle.kts](settings.gradle.kts): centralized repository config
   (`RepositoriesMode.FAIL_ON_PROJECT_REPOS`).
+- [gradle.properties](gradle.properties): project `group` and `version`.
+- [.github/workflows/ci.yml](.github/workflows/ci.yml): GitHub Actions CI —
+  runs `lintKotlin`, `detekt`, and `test` on pushes to `master` and on every
+  pull request.
 
 ## Tests
 

@@ -1,4 +1,5 @@
 [![Kotlin](https://img.shields.io/badge/%20language-Kotlin-red.svg)](https://kotlinlang.org/)
+[![CI](https://github.com/maleich/ReadingBat-content/actions/workflows/ci.yml/badge.svg)](https://github.com/maleich/ReadingBat-content/actions/workflows/ci.yml)
 
 # ReadingBat Template
 
@@ -25,7 +26,16 @@ Once you create content for your students, send us a note and we will link the
 
 ## Build & Run
 
-Requires JDK 25.
+Current version: **1.1.0** — see [CHANGELOG.md](CHANGELOG.md) and
+[RELEASE_NOTES.md](RELEASE_NOTES.md).
+
+Requires JDK 25. Toolchain versions are centralized in
+[gradle/libs.versions.toml](gradle/libs.versions.toml): Kotlin 2.4.10,
+Ktor 3.5.1, readingbat-core 3.3.0, Kotest 6.2.3, kotlinter 5.6.0,
+detekt 2.0.0-alpha.5, Gradle 9.6.1.
+
+Lint, detekt, and tests also run in GitHub Actions on every push to `master`
+and every pull request (see [.github/workflows/ci.yml](.github/workflows/ci.yml)).
 
 | Task | Command |
 | --- | --- |
