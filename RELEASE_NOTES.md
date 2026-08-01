@@ -1,5 +1,55 @@
 # Release Notes
 
+## 1.1.1 — 2026-08-01
+
+A small patch release: dependency refresh, a build cleanup, and a leaner
+`CLAUDE.md`. No challenge content has changed, and nothing about authoring or
+registering challenges is different.
+
+### Highlights
+
+- **Dependency refresh.** `readingbat-core`/`readingbat-kotest` move to 3.3.1
+  and `core-utils` to 3.2.2. Everything else in the catalog is unchanged from
+  1.1.0.
+- **Versions plugin relocated.** The Gradle Versions plugin moves to 0.57.0,
+  and its plugin ID changes from `com.github.ben-manes.versions` to
+  `io.github.ben-manes.versions`. `make versions` behaves the same.
+- **Build cleanup.** The unused `Tasks` and `Shadow` constant objects and an
+  unused `JvmTarget` import are gone from `build.gradle.kts`.
+- **`CLAUDE.md` trimmed to 55 lines.** Everything removed was content a
+  contributor or agent can reconstruct by reading the repo — the enumerated
+  `make` target list, the JVM-toolchain clause, the hand-maintained toolchain
+  version list, a restated Kotest convention, the kotlinter/detekt wiring
+  description, and the `ci.yml` walkthrough. The gotchas, the release
+  checklist, the `Content.kt` registration rules, and the detekt baseline
+  caveat all survive intact.
+
+### Upgrade notes
+
+- If you maintain a fork with its own `build.gradle.kts`, the Versions plugin
+  ID must change to `io.github.ben-manes.versions` when you move to 0.57.0;
+  the old ID no longer resolves.
+- No action is needed for the dependency bumps — 3.3.1 and 3.2.2 are drop-in
+  patch releases.
+- Building still requires **JDK 25**, and detekt is still on a `2.0.0-alpha`
+  line.
+
+### Versions
+
+| Component        | Version          |
+| ---------------- | ---------------- |
+| Kotlin           | 2.4.10           |
+| Ktor             | 3.5.1            |
+| readingbat-core  | 3.3.1            |
+| Kotest           | 6.2.3            |
+| core-utils       | 3.2.2            |
+| kotlin-logging   | 8.0.4            |
+| Gradle           | 9.6.1            |
+| kotlinter        | 5.6.0            |
+| detekt           | 2.0.0-alpha.5    |
+| Versions plugin  | 0.57.0           |
+| JVM toolchain    | 25               |
+
 ## 1.1.0 — 2026-07-26
 
 This is a tooling, dependency, and cleanup release. No challenge content has changed.
