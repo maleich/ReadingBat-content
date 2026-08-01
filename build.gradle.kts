@@ -3,19 +3,7 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.gradle.kotlin.dsl.named
 import org.gradle.kotlin.dsl.withType
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
-private object Tasks {
-  const val CLEAN = "clean"
-  const val BUILD = "build"
-  const val STAGE = "stage"
-}
-
-private object Shadow {
-  const val ARCHIVE_NAME = "server.jar"
-  val EXCLUDES = listOf("META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA", "LICENSE*")
-}
 
 plugins {
   application
