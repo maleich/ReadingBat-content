@@ -26,13 +26,13 @@ Once you create content for your students, send us a note and we will link the
 
 ## Build & Run
 
-Current version: **1.1.0** — see [CHANGELOG.md](CHANGELOG.md) and
+Current version: **1.1.1** — see [CHANGELOG.md](CHANGELOG.md) and
 [RELEASE_NOTES.md](RELEASE_NOTES.md).
 
 Requires JDK 25. Toolchain versions are centralized in
 [gradle/libs.versions.toml](gradle/libs.versions.toml): Kotlin 2.4.10,
-Ktor 3.5.1, readingbat-core 3.3.0, Kotest 6.2.3, kotlinter 5.6.0,
-detekt 2.0.0-alpha.5, Gradle 9.6.1.
+Ktor 3.5.1, readingbat-core 3.3.1, Kotest 6.2.3, core-utils 3.2.2,
+kotlinter 5.6.0, detekt 2.0.0-alpha.5, Gradle 9.6.1.
 
 Lint, detekt, and tests also run in GitHub Actions on every push to `master`
 and every pull request (see [.github/workflows/ci.yml](.github/workflows/ci.yml)).

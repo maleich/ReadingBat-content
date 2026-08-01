@@ -6,6 +6,35 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-08-01
+
+Patch release: dependency refresh, a small build cleanup, and documentation
+trimming. No challenge content changed.
+
+### Changed
+- Bumped `readingbat-core`/`readingbat-kotest` to 3.3.1 and `core-utils` to
+  3.2.2.
+- Bumped the Gradle Versions plugin to 0.57.0 and migrated its plugin ID from
+  `com.github.ben-manes.versions` to `io.github.ben-manes.versions`, following
+  the plugin's relocation.
+- Trimmed `CLAUDE.md` from 73 to 55 lines, removing guidance that a contributor
+  or agent can derive from the repository itself: the enumerated `make` target
+  list (the `Makefile` is self-documenting via `## ` annotations), the
+  JVM-toolchain clause, the hand-maintained toolchain version list, the
+  restated Kotest testing convention, the kotlinter/detekt wiring description,
+  and the `ci.yml` walkthrough. Gotchas, the release checklist, the
+  `Content.kt` registration rules, and the detekt baseline caveat are unchanged.
+
+### Removed
+- Unused `Tasks` and `Shadow` constant objects and the unused `JvmTarget`
+  import from `build.gradle.kts`.
+
+### Fixed
+- `CLAUDE.md` no longer restates the project version or the dependency version
+  set. Both had already drifted from `gradle.properties` and
+  `gradle/libs.versions.toml`, which is why they were removed rather than
+  corrected.
+
 ## [1.1.0] - 2026-07-26
 
 Tooling, dependency, and documentation release. No challenge content changed.
