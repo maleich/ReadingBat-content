@@ -1,0 +1,14 @@
+version: 2
+
+updates:
+  # Gradle dependencies are tracked via `make versions` (dependencyUpdates),
+  # so Dependabot only watches the GitHub Actions used by CI.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      github-actions:
+        patterns: ["*"]
+    commit-message:
+      prefix: ci
