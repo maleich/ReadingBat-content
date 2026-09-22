@@ -27,7 +27,6 @@ No challenge content changed.
 - Upgraded the Gradle wrapper to 9.7.1 (`gradle-wrapper.jar`,
   `gradle-wrapper.properties`, and the `gradle-wrapper` entry in the version
   catalog that `make upgrade-wrapper` reads).
-- Normalized `gradlew.bat` line endings under the new `.gitattributes` rules.
 
 ### Fixed
 - Backfilled the `1.0.0` changelog entry with its actual release date
