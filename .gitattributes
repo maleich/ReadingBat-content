@@ -1,0 +1,17 @@
+# Normalize all text files to LF in the repository
+* text=auto eol=lf
+
+# Windows scripts must be CRLF in the working tree
+*.bat text eol=crlf
+
+# Unix scripts must stay LF
+gradlew text eol=lf
+
+# Explicit binaries — never diff, never normalize
+*.jar binary
+*.png binary
+
+# Keep GitHub language stats focused on challenge content
+gradlew          linguist-vendored
+gradlew.bat      linguist-vendored
+gradle/wrapper/* linguist-vendored

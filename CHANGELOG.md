@@ -6,6 +6,33 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-09-21
+
+Dependency and tooling release: a Ktor minor bump, a `readingbat-core` minor
+bump, a Gradle wrapper upgrade, and repository-wide line-ending normalization.
+No challenge content changed.
+
+### Added
+- `.gitattributes`, normalizing all text files to LF in the repository while
+  keeping `*.bat` as CRLF and `gradlew` as LF in the working tree. JARs and
+  PNGs are marked binary so they are never diffed or normalized, and `gradlew`,
+  `gradlew.bat`, and `gradle/wrapper/*` are marked `linguist-vendored` so
+  GitHub's language statistics reflect challenge content rather than the
+  vendored wrapper.
+
+### Changed
+- Bumped `readingbat-core`/`readingbat-kotest` to 3.4.0 and Ktor to 3.6.0.
+- Bumped Kotest to 6.2.5, kotlinter to 5.7.0, detekt to 2.0.0-alpha.6, and the
+  Gradle Versions plugin to 0.64.0.
+- Upgraded the Gradle wrapper to 9.7.1 (`gradle-wrapper.jar`,
+  `gradle-wrapper.properties`, and the `gradle-wrapper` entry in the version
+  catalog that `make upgrade-wrapper` reads).
+
+### Fixed
+- Backfilled the `1.0.0` changelog entry with its actual release date
+  (2026-04-30) and a one-line description, replacing the placeholder
+  "Initial template" heading.
+
 ## [1.1.1] - 2026-08-01
 
 Patch release: dependency refresh, a small build cleanup, and documentation
@@ -97,7 +124,9 @@ Tooling, dependency, and documentation release. No challenge content changed.
 ### Fixed
 - Trimmed trailing whitespace in `README.md`.
 
-## [1.0.0] - Initial template
+## [1.0.0] - 2026-04-30
+
+Initial content repository.
 
 - Forked from the [ReadingBat template](https://github.com/readingbat/readingbat-template).
 - Wires Python, Java, and Kotlin challenge sources into the ReadingBat DSL.
