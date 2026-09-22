@@ -51,5 +51,6 @@ Before pushing, `make lint && make tests` reproduces CI locally.
 - `settings.gradle.kts` sets `RepositoriesMode.FAIL_ON_PROJECT_REPOS` — repositories must be declared in `settings.gradle.kts`, not in `build.gradle.kts`.
 - `org.gradle.configuration-cache=false` is intentional (some plugin in the chain isn't CC-compatible); don't flip it without verifying the build still works.
 - The `gradle-wrapper = "..."` entry in `gradle/libs.versions.toml` is consumed by the `Makefile` (`make upgrade-wrapper`) via `sed`, not by Gradle itself. Don't remove it thinking it's dead.
+- `.gitattributes` stores every text file as LF but keeps `*.bat` CRLF and `gradlew` LF in the working tree. Don't "fix" `gradlew.bat`'s CRLF endings — they're required. It also marks the wrapper files `linguist-vendored` so GitHub's language stats reflect challenge content.
 - `make versions` (dependencyUpdates) filters out pre-release candidates (alpha/beta/RC/milestone/snapshot) for any dependency currently on a stable version, but still surfaces newer pre-releases for deps already tracking a pre-release line (e.g. detekt's alpha). See `configureVersions()` in `build.gradle.kts`.
 - Java challenge package is `jgroup` and Kotlin challenge package is `kgroup` (not `group1` / `kgroup1`). The directory name must match the `packageName` in `Content.kt`.

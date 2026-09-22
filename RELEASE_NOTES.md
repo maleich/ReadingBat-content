@@ -1,5 +1,59 @@
 # Release Notes
 
+## 1.2.0 — 2026-09-21
+
+A dependency and tooling release. Ktor and `readingbat-core` both take minor
+bumps, the Gradle wrapper moves to 9.7.1, and the repository gains a
+`.gitattributes` file that settles line endings once and for all. No challenge
+content has changed, and nothing about authoring or registering challenges is
+different.
+
+### Highlights
+
+- **Framework bumps.** `readingbat-core`/`readingbat-kotest` move to 3.4.0 and
+  Ktor to 3.6.0 — both minor releases, which is why this is 1.2.0 rather than a
+  patch. `ContentTests` passes unchanged against the new versions.
+- **Tooling refresh.** Kotest 6.2.5, kotlinter 5.7.0, detekt 2.0.0-alpha.6, and
+  the Gradle Versions plugin 0.64.0.
+- **Gradle wrapper 9.7.1.** The wrapper JAR, `gradle-wrapper.properties`, and
+  the `gradle-wrapper` entry in the version catalog (the one `make
+  upgrade-wrapper` rewrites via `sed`) all move together.
+- **Line endings normalized.** A new `.gitattributes` stores every text file as
+  LF while keeping `*.bat` CRLF and `gradlew` LF in the working tree, marks
+  `*.jar` and `*.png` binary, and marks `gradlew`, `gradlew.bat`, and
+  `gradle/wrapper/*` as `linguist-vendored` so GitHub's language bar reflects
+  the Python, Java, and Kotlin challenge content instead of the vendored
+  wrapper scripts.
+- **Changelog backfill.** The `1.0.0` entry now carries its real date
+  (2026-04-30) and a one-line description instead of the placeholder
+  "Initial template" heading.
+
+### Upgrade notes
+
+- Nothing in the DSL or the content layout changed; existing `Content.kt`
+  declarations and challenge files work as-is.
+- After pulling this release, a `git status` may show text files as modified
+  once Git renormalizes them to LF. `git add --renormalize .` settles it; the
+  file contents are unchanged.
+- Building still requires **JDK 25**, and detekt is still on a `2.0.0-alpha`
+  line.
+
+### Versions
+
+| Component        | Version          |
+| ---------------- | ---------------- |
+| Kotlin           | 2.4.10           |
+| Ktor             | 3.6.0            |
+| readingbat-core  | 3.4.0            |
+| Kotest           | 6.2.5            |
+| core-utils       | 3.2.2            |
+| kotlin-logging   | 8.0.4            |
+| Gradle           | 9.7.1            |
+| kotlinter        | 5.7.0            |
+| detekt           | 2.0.0-alpha.6    |
+| Versions plugin  | 0.64.0           |
+| JVM toolchain    | 25               |
+
 ## 1.1.1 — 2026-08-01
 
 A small patch release: dependency refresh, a build cleanup, and a leaner
