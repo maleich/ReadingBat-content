@@ -26,13 +26,13 @@ Once you create content for your students, send us a note and we will link the
 
 ## Build & Run
 
-Current version: **1.2.0** — see [CHANGELOG.md](CHANGELOG.md) and
+Current version: **1.3.0** — see [CHANGELOG.md](CHANGELOG.md) and
 [RELEASE_NOTES.md](RELEASE_NOTES.md).
 
 Requires JDK 25. Toolchain versions are centralized in
-[gradle/libs.versions.toml](gradle/libs.versions.toml): Kotlin 2.4.10,
-Ktor 3.6.0, readingbat-core 3.4.0, Kotest 6.2.5, core-utils 3.2.2,
-kotlinter 5.7.0, detekt 2.0.0-alpha.6, Gradle 9.7.1.
+[gradle/libs.versions.toml](gradle/libs.versions.toml): Kotlin 2.4.21,
+Ktor 3.6.0, readingbat-core 3.5.0, Kotest 6.2.5, core-utils 5.1.1,
+kotlinter 5.7.0, detekt 2.0.0-alpha.6, Gradle 9.8.1.
 
 Lint, detekt, and tests also run in GitHub Actions on every push to `master`
 and every pull request (see [.github/workflows/ci.yml](.github/workflows/ci.yml)).
@@ -51,7 +51,8 @@ and every pull request (see [.github/workflows/ci.yml](.github/workflows/ci.yml)
 | Regenerate detekt baseline | `make detekt-baseline` |
 | Build the shadow uberjar | `make uberjar` (output: `build/libs/server.jar`) |
 | Build uberjar and run it | `make uber` |
-| Check for dependency updates | `make versions` |
+| List outdated dependencies | `make versions` |
+| Full dependency report, up-to-date ones included | `make versions-all` |
 | Upgrade the Gradle wrapper | `make upgrade-wrapper` |
 
 ## Content Specification

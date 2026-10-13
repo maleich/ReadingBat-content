@@ -1,5 +1,66 @@
 # Release Notes
 
+## 1.3.0 — 2026-10-13
+
+A dependency and tooling release. `readingbat-core` takes a minor bump, the
+Gradle wrapper moves to 9.8.1, the Gradle configuration cache is on, and
+`make versions` now shows only what needs attention. No challenge content has
+changed, and nothing about authoring or registering challenges is different.
+
+### Highlights
+
+- **Framework bump.** `readingbat-core`/`readingbat-kotest` move to 3.5.0, a
+  minor release, which is why this is 1.3.0 rather than a patch. Kotlin moves
+  to 2.4.21, and `core-utils` jumps from 3.2.2 to 5.1.1. `ContentTests` passes
+  unchanged against the new versions.
+- **Quieter `make versions`.** It now prints one line per outdated dependency
+  (`group:name current -> latest`), one per dependency it could not check, and
+  a Gradle update if there is one. When nothing is behind, it says so. The
+  plugin's full report, up-to-date dependencies included, moves to the new
+  `make versions-all`.
+- **Configuration cache on.** `gradle.properties` turns on
+  `org.gradle.configuration-cache`, so a repeat build skips configuration
+  entirely. The tests and the fat jar both build with the cache on.
+  `dependencyUpdates` is the one task that isn't compatible, and the `make
+  versions` targets opt it out per run.
+- **Daemon settings.** `gradle.properties` also gives the Gradle and Kotlin
+  daemons a 4 GB heap, a heap dump on out-of-memory, and UTF-8 file encoding.
+- **Gradle wrapper 9.8.1.** The wrapper JAR, `gradle-wrapper.properties`,
+  `gradlew.bat`, and the `gradle-wrapper` entry in the version catalog all move
+  together. The Gradle Versions plugin moves to 0.66.0.
+- **CI actions refreshed.** `actions/checkout` v7, `actions/setup-java` v6,
+  `gradle/actions/setup-gradle` v6, and `actions/upload-artifact` v7. A new
+  `.github/dependabot.yml` checks them weekly so they don't drift again.
+
+### Upgrade notes
+
+- Nothing in the DSL or the content layout changed; existing `Content.kt`
+  declarations and challenge files work as-is. The `core-utils` classes
+  `Content.kt` imports (`FileSystemSource`, `GitHubRepo`, `OwnerType`) are
+  unchanged across its 3.x → 5.x jump.
+- The Gradle daemons now ask for a 4 GB heap. On a machine short of memory,
+  lower `org.gradle.jvmargs` in `gradle.properties`.
+- If a plugin you add later fails under the configuration cache,
+  `--no-configuration-cache` turns the cache off for a single run.
+- Building still requires **JDK 25**, and detekt is still on a `2.0.0-alpha`
+  line.
+
+### Versions
+
+| Component        | Version          |
+| ---------------- | ---------------- |
+| Kotlin           | 2.4.21           |
+| Ktor             | 3.6.0            |
+| readingbat-core  | 3.5.0            |
+| Kotest           | 6.2.5            |
+| core-utils       | 5.1.1            |
+| kotlin-logging   | 8.0.4            |
+| Gradle           | 9.8.1            |
+| kotlinter        | 5.7.0            |
+| detekt           | 2.0.0-alpha.6    |
+| Versions plugin  | 0.66.0           |
+| JVM toolchain    | 25               |
+
 ## 1.2.0 — 2026-09-21
 
 A dependency and tooling release. Ktor and `readingbat-core` both take minor
