@@ -6,6 +6,17 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Fixed
+- `make uberjar`, and so `make uber`, ran `./gradlew uberjar`, a task the build
+  does not define, and failed. They now run the Ktor plugin's `buildFatJar`,
+  which writes `build/libs/server.jar`.
+- The application's main class was set to `ContentServerKt`, a class the build
+  never produces: `ContentServer.kt` declares `object ContentServer`. Both
+  `make run` and the uberjar (`make uber`, and the `Procfile`'s
+  `java -jar build/libs/server.jar`) failed at startup with
+  `ClassNotFoundException: ContentServerKt`. `mainClass` is now
+  `ContentServer`.
+
 ## [1.3.0] - 2026-10-13
 
 Dependency and tooling release: a `readingbat-core` minor bump, a Gradle
