@@ -31,7 +31,7 @@ tests: ## Run all tests
 	./gradlew --rerun-tasks check
 
 uberjar: ## Build shadow uberjar to build/libs/server.jar
-	./gradlew uberjar
+	./gradlew buildFatJar
 
 uber: uberjar ## Build uberjar and run it
 	java -jar build/libs/server.jar

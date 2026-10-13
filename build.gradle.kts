@@ -17,7 +17,7 @@ plugins {
 description = "ReadingBat Site"
 
 application {
-  mainClass = "ContentServerKt"
+  mainClass = "ContentServer"
 }
 
 dependencies {
