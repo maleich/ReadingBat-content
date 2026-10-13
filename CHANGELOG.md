@@ -6,6 +6,46 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-10-13
+
+Dependency and tooling release: a `readingbat-core` minor bump, a Gradle
+wrapper upgrade, the Gradle configuration cache turned on, a quieter
+`make versions`, and newer GitHub Actions in CI, now watched by Dependabot.
+No challenge content changed.
+
+### Added
+- `make versions-all`, which prints the Gradle Versions plugin's full plain
+  report (`--output-formatter=plain`), up-to-date dependencies included.
+- `.github/dependabot.yml`: a weekly Dependabot check of the GitHub Actions
+  used by CI, grouped into one pull request with a `ci` commit prefix. Gradle
+  dependencies stay with `make versions`.
+- `org.gradle.jvmargs` in `gradle.properties`: a 4 GB heap for the Gradle and
+  Kotlin daemons, a heap dump on out-of-memory, and UTF-8 file encoding.
+
+### Changed
+- Bumped `readingbat-core`/`readingbat-kotest` to 3.5.0, `core-utils` to
+  5.1.1, and Kotlin to 2.4.21.
+- Bumped the Gradle Versions plugin to 0.66.0.
+- Upgraded the Gradle wrapper to 9.8.1 (`gradle-wrapper.jar`,
+  `gradle-wrapper.properties`, the regenerated `gradlew.bat`, and the
+  `gradle-wrapper` entry in the version catalog that `make upgrade-wrapper`
+  reads).
+- Turned on the Gradle configuration cache
+  (`org.gradle.configuration-cache=true`). `dependencyUpdates` stays marked
+  incompatible in `configureVersions()`, and the `make versions` targets pass
+  `--no-configuration-cache`.
+- `make versions` now lists only the dependencies with newer versions, any
+  that could not be checked, and a Gradle update if one exists, or prints
+  "All dependencies are up to date". The new `outputFormatter` in
+  `configureVersions()` does this; the pre-release filtering is unchanged.
+- Bumped the GitHub Actions used by CI: `actions/checkout` v4 → v7,
+  `actions/setup-java` v4 → v6, `gradle/actions/setup-gradle` v4 → v6, and
+  `actions/upload-artifact` v4 → v7.
+
+### Fixed
+- `make help` no longer describes `make versions` as the default target; a
+  bare `make` prints `help`.
+
 ## [1.2.0] - 2026-09-21
 
 Dependency and tooling release: a Ktor minor bump, a `readingbat-core` minor

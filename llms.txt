@@ -14,7 +14,7 @@ appropriate language directory under the group's `packageName`, and
 disk is invisible to the site until the DSL references it. Java return
 types are inferred from the source; Python and Kotlin must be declared.
 
-Current version: **1.2.0** (see [CHANGELOG.md](CHANGELOG.md)). Building requires
+Current version: **1.3.0** (see [CHANGELOG.md](CHANGELOG.md)). Building requires
 JDK 25.
 
 ## Project layout
@@ -39,16 +39,17 @@ JDK 25.
 
 - [Makefile](Makefile): self-documenting (`make help`). Common targets:
   `make run`, `make build`, `make tests`, `make lint`, `make format`,
-  `make uber`, `make versions`.
+  `make uber`, `make versions`, `make versions-all`.
 - [build.gradle.kts](build.gradle.kts): Gradle build with Kotlin JVM, Ktor,
   Shadow, kotlinter, detekt, and the Versions plugin.
 - [gradle/libs.versions.toml](gradle/libs.versions.toml): version catalog.
-  Kotlin 2.4.10, Ktor 3.6.0, readingbat-core 3.4.0, Kotest 6.2.5,
-  core-utils 3.2.2, kotlinter 5.7.0, detekt 2.0.0-alpha.6, Gradle wrapper 9.7.1,
+  Kotlin 2.4.21, Ktor 3.6.0, readingbat-core 3.5.0, Kotest 6.2.5,
+  core-utils 5.1.1, kotlinter 5.7.0, detekt 2.0.0-alpha.6, Gradle wrapper 9.8.1,
   JVM toolchain 25.
 - [settings.gradle.kts](settings.gradle.kts): centralized repository config
   (`RepositoriesMode.FAIL_ON_PROJECT_REPOS`).
-- [gradle.properties](gradle.properties): project `group` and `version`.
+- [gradle.properties](gradle.properties): project `group` and `version`,
+  Gradle daemon JVM args, and the build and configuration caches (both on).
 - [.gitattributes](.gitattributes): line-ending normalization (LF in the
   repository, CRLF for `*.bat`), binary markers for `*.jar`/`*.png`, and
   `linguist-vendored` on the Gradle wrapper files.
